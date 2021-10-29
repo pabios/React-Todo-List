@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+## Énoncé
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Nous allons mobiliser les concepts appris dans les exercices précédents.
 
-## Available Scripts
+Pour cela nous allons créer une application de gestion de liste de tâches à faire.
 
-In the project directory, you can run:
+### Partie 1
 
-### `npm start`
+Nous allons gérer l'input qui permet la saisie du `title` de la `Todo` afin de pouvoir la créer.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Cet input:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Doit être un composant contrôlé
+- Doit écouter l'événement qui détecte la pression d'une touche du clavier pour valider la saisie avec la touche `Entrée` et l'annuler avec la touche `Echap`
+- Quand la saisie est validée on s'assure de bien avoir notre objet todo (au moins en faisant un console.log dans les premiers temps) et que le champ soit vidé
+- Quand la saisie est annulée on vide le champ
 
-### `npm test`
+#### Comment faire ?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Nous allons passer par une variable d'état que l'on va nommer `newTodo` qui nous permettra de gérer les saisies, et qui contiendra les données à ajouter à la liste.
 
-### `npm run build`
+un objet `newTodo` doit respecter le modèle suivant :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```javascript
+    let newTodo = {
+        id: 1
+        title: 'ma super tâche',
+        isCompleted : false,
+        isEditing: false
+    }
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Partie 2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Nous allons maintenant faire en sorte qu'en appuyant sur entrée dans l'input, le `newTodo` s'ajoute à la liste des `todos`.
 
-### `npm run eject`
+Il faudra donc mettre à jour la variable d'état qui contient la liste.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Dans un premier temps nous allons utiliser le `hook d'effet` pour `console.log` notre liste à chaque fois qu'elle change
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ensuite il faudra faire en sorte que le composant `TodoList` reçoive la nouvelle liste.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Partie 3
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Nous allons maintenant travailler dans le composant `TodoItem` afin que celui-ci affiche en plus du `title`, l'état `isCompleted` (faites comme bon vous semblera)
 
-## Learn More
+Il faudra lui ajouter un bouton qui permet de changer son état. Ainsi qu'un bouton permettant de la supprimer de la liste.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Quand l'état est à `isCompleted === true`, le `title` du `TodoItem` doit être barré
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> _E.G_ : Ma todo active | ~~Ma todo complétée~~
 
-### Code Splitting
+### Partie 4
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Nous allons maintenant travailler dans le composant `TodoFilter` afin que celui-ci affiche 3 boutons.
+L'un permettra de ne pas filtrer la liste. Un autre permettra d'afficher seulement les `TodoItem` qui sont à l'état `isCompleted === true` et le dernier d'afficher seulement les `TodoItem` qui sont à l'état `isCompleted === false`.
 
-### Analyzing the Bundle Size
+Il est évident que nous devrons travailler avec une nouvelle variable d'état qui contient la liste des todos où l'on applique le filtre
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Partie 5
 
-### Making a Progressive Web App
+Nous allons maintenant faire en sorte qu'en double cliquant sur le `title`d'un `TodoItem` on affiche un input qui nous permet d'éditer la valeur de ce `title`.
+Comme l'input précédant il devra écouter les événements de clavier afin de pouvoir valider la saisie avec la touche `Entrée`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Partie 6
 
-### Advanced Configuration
+Nous allons maintenant implémenter le bouton qui permet de supprimer les `TodoItem`qui ont l'état `isCompleted === true`.
+Ce bouton ne doit apparaitre que si au moins une des todos est complétée.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Astuces
 
-### Deployment
+⚠️ Vous n'êtes pas dans l'obligation de mettre un <button>bouton</button>. ⚠️
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+N'importe quel élément HTML qui écoute le clic permettra cette action.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Nous sommes arrivés à la fin de ce module. Bravo à vous si vous vous êtes accrochés jusque-là.
+
+> YOU'RE BREATHTAKING !
+>
+> <cite>Keanu Reeves</cite>
+
+> OnDoubleClick C'EST D'LA MERDE
+>
+> <cite>[V1dev](https://github.com/Sata51) && [Cyriil77](https://>github.com/cyrilmarceau)</cite>
