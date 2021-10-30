@@ -2,7 +2,15 @@ import React from "react";
 import TodoItem from "./TodoItem";
 
 export default function TodoList(props) {
-  const { todos, changeTodoState, deleteTodo, doubleClick, onEditInputChange } = props;
+  const {
+    todos,
+    changeTodoState,
+    deleteTodo,
+    doubleClick,
+    onEditInputChange,
+    handleKeyDownEditInput,
+    suprimeDejaFait
+  } = props;
 
   const doubleClickFromTodoList = (todo) => {
     console.log("double click from todolist : ", todos);
@@ -10,6 +18,7 @@ export default function TodoList(props) {
     doubleClick(todo);
   };
 
+  
   const listHtml = todos.map((todo) => {
     // return <li key={todo.id}>{todo.title}</li>;
     return (
@@ -23,6 +32,8 @@ export default function TodoList(props) {
           deleteTodo={deleteTodo}
           doubleClickFromTodoList={doubleClickFromTodoList}
           onEditInputChange={onEditInputChange}
+          handleKeyDownEditInput={handleKeyDownEditInput} 
+         
         />
       </li>
     );
@@ -30,6 +41,9 @@ export default function TodoList(props) {
 
   return (
     <>
+      <ul>
+        <button onClick={()=>suprimeDejaFait()}>supprimer deja fait</button>
+      </ul>
       <ul className={"todo-list"}>{listHtml}</ul>
     </>
   );

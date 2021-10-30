@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function TodoItem(props) {
   const {
@@ -10,7 +10,11 @@ export default function TodoItem(props) {
     deleteTodo,
     doubleClickFromTodoList,
     onEditInputChange,
+    handleKeyDownEditInput,
+     
   } = props;
+
+  const [oldTitle, setOldTitle] = useState(title);
 
   const onCheck = (e) => {
     e.preventDefault();
@@ -21,6 +25,7 @@ export default function TodoItem(props) {
     e.preventDefault();
     deleteTodo(id);
   };
+   
 
   const doubleClickFromTodoItem = () => {
     const newTodo = {
@@ -34,9 +39,9 @@ export default function TodoItem(props) {
     doubleClickFromTodoList(newTodo);
   };
 
-  const handleKeyDownEditInput = (e) => {
+  const keyDownEditInput = (e) => {
     // on veut récuperer la touche entrée
-    console.log(e);
+    handleKeyDownEditInput(e.key, id,oldTitle);
   };
 
   const handleEditInput = (e) => {
@@ -56,7 +61,7 @@ export default function TodoItem(props) {
           type="text"
           value={title}
           onChange={(e) => handleEditInput(e)}
-          onKeyDown={(e) => handleKeyDownEditInput(e)}
+          onKeyDown={(e) => keyDownEditInput(e)}
         />
       ) : (
         <span

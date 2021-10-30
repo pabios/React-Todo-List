@@ -56,14 +56,14 @@ function App() {
   };
 
   const deleteTodo = (id) => {
-      // const newList = todos.filter((todo) => {
-      // if (todo.id === id) {
-      // return false;
-      // } else {
-      // return true;
-      // }
-      // });
-      // setTodos(newList);
+    // const newList = todos.filter((todo) => {
+    // if (todo.id === id) {
+    // return false;
+    // } else {
+    // return true;
+    // }
+    // });
+    // setTodos(newList);
     setTodos(todos.filter((t) => t.id !== id));
   };
 
@@ -173,6 +173,43 @@ function App() {
     setTodos(newList);
   };
 
+  const handleKeyDownEditInput = (key, id,oldTitle) => {
+    switch (key) {
+      case "Enter":
+        const newList = todos.map((t) => {
+          if (t.id === id) {
+            return { ...t, isEditing: !t.isEditing };
+          } else {
+            return t;
+          }
+        });
+        setTodos(newList);
+        break;
+
+      case 'Escape':
+        const newList2 = todos.map((t) => {
+          if (t.id === id) {
+            return { ...t,oldTitle, isEditing: !t.isEditing };
+          } else {
+            return t;
+          }
+        });
+        setTodos(newList2);
+
+
+
+        break;
+      default:
+        break;
+    }
+  };
+
+  const suprimeDejaFait = ()=>{
+    console.log(todo=> (todo.isCompleted))
+    const resteTache = todos.filter(todo=> (todo.isCompleted));
+    setNewTodo(resteTache)
+  }
+
   const onEditInputChange = (value, id) => {
     console.log("onEditInputChange : ", value);
     // on veut reactuliser la valeur de l'input, et donc le todo.title.
@@ -182,7 +219,7 @@ function App() {
         return {
           id: t.id,
           title: t.title,
-          isCompleted: t.id,
+          isCompleted: t.isCompleted,
           isEditing: t.isEditing,
           title: value,
         };
@@ -215,6 +252,8 @@ function App() {
         deleteTodo={deleteTodo}
         doubleClick={doubleClick}
         onEditInputChange={onEditInputChange}
+        handleKeyDownEditInput={handleKeyDownEditInput}
+        suprimeDejaFait={suprimeDejaFait}
       />
     </div>
   );
