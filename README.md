@@ -15,7 +15,7 @@ Cet input:
 - Quand la saisie est validée on s'assure de bien avoir notre objet todo (au moins en faisant un console.log dans les premiers temps) et que le champ soit vidé
 - Quand la saisie est annulée on vide le champ
 
-#### Astuce 1
+#### Debrif newTodo
 
 Nous allons passer par une variable d'état que l'on va nommer `newTodo` qui nous permettra de gérer les saisies, et qui contiendra les données à ajouter à la liste.
 
@@ -67,9 +67,5 @@ Comme l'input précédant il devra écouter les événements de clavier afin de 
 Nous allons maintenant implémenter le bouton qui permet de supprimer les `TodoItem`qui ont l'état `isCompleted === true`.
 Ce bouton ne doit apparaitre que si au moins une des todos est complétée.
 
-## Astuces
-
-⚠️ Vous n'êtes pas dans l'obligation de mettre un <button>bouton</button>. ⚠️
-
-N'importe quel élément HTML qui écoute le clic permettra cette action.
+ 
 
