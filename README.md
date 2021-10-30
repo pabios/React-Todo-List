@@ -1,8 +1,8 @@
 ## Énoncé
 
-Nous allons mobiliser les concepts appris dans les exercices précédents.
+ mobilisation de tout les concepts appris dans la première semaine de React.
 
-Pour cela nous allons créer une application de gestion de liste de tâches à faire.
+pour créer une application de gestion de liste de tâches à faire (Todo list)
 
 ### Partie 1
 
@@ -15,7 +15,7 @@ Cet input:
 - Quand la saisie est validée on s'assure de bien avoir notre objet todo (au moins en faisant un console.log dans les premiers temps) et que le champ soit vidé
 - Quand la saisie est annulée on vide le champ
 
-#### Comment faire ?
+#### Astuce 1
 
 Nous allons passer par une variable d'état que l'on va nommer `newTodo` qui nous permettra de gérer les saisies, et qui contiendra les données à ajouter à la liste.
 
@@ -24,7 +24,7 @@ un objet `newTodo` doit respecter le modèle suivant :
 ```javascript
     let newTodo = {
         id: 1
-        title: 'ma super tâche',
+        title: 'reviser React ',
         isCompleted : false,
         isEditing: false
     }
@@ -73,14 +73,3 @@ Ce bouton ne doit apparaitre que si au moins une des todos est complétée.
 
 N'importe quel élément HTML qui écoute le clic permettra cette action.
 
----
-
-Nous sommes arrivés à la fin de ce module. Bravo à vous si vous vous êtes accrochés jusque-là.
-
-> YOU'RE BREATHTAKING !
->
-> <cite>Keanu Reeves</cite>
-
-> OnDoubleClick C'EST D'LA MERDE
->
-> <cite>[V1dev](https://github.com/Sata51) && [Cyriil77](https://>github.com/cyrilmarceau)</cite>
