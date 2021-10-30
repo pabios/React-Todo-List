@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useEffect } from "react/cjs/react.development";
+
 export default function TodoItem(props) {
   const {
     id,
@@ -11,10 +13,13 @@ export default function TodoItem(props) {
     doubleClickFromTodoList,
     onEditInputChange,
     handleKeyDownEditInput,
-     
   } = props;
 
   const [oldTitle, setOldTitle] = useState(title);
+
+  useEffect(() => {
+    setOldTitle(title);
+  }, [isEditing]);
 
   const onCheck = (e) => {
     e.preventDefault();
@@ -25,7 +30,6 @@ export default function TodoItem(props) {
     e.preventDefault();
     deleteTodo(id);
   };
-   
 
   const doubleClickFromTodoItem = () => {
     const newTodo = {
@@ -41,7 +45,10 @@ export default function TodoItem(props) {
 
   const keyDownEditInput = (e) => {
     // on veut récuperer la touche entrée
-    handleKeyDownEditInput(e.key, id,oldTitle);
+    // if (e.key === 'Enter') {
+    // setOldTitle(title);
+    // }
+    handleKeyDownEditInput(e.key, id, oldTitle);
   };
 
   const handleEditInput = (e) => {

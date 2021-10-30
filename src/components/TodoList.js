@@ -9,7 +9,8 @@ export default function TodoList(props) {
     doubleClick,
     onEditInputChange,
     handleKeyDownEditInput,
-    suprimeDejaFait
+    deleteCompleted,
+    deleteAll,
   } = props;
 
   const doubleClickFromTodoList = (todo) => {
@@ -18,7 +19,19 @@ export default function TodoList(props) {
     doubleClick(todo);
   };
 
-  
+  const listIsEmpty = () => {
+    // const newList = todos.filter((todo) => {
+    // if (todo.isCompleted) {
+    // return true;
+    // } else {
+    // return false;
+    // }
+    // });
+
+    const newList = todos.filter((t) => t.isCompleted);
+    return newList.length === 0;
+  };
+
   const listHtml = todos.map((todo) => {
     // return <li key={todo.id}>{todo.title}</li>;
     return (
@@ -32,8 +45,7 @@ export default function TodoList(props) {
           deleteTodo={deleteTodo}
           doubleClickFromTodoList={doubleClickFromTodoList}
           onEditInputChange={onEditInputChange}
-          handleKeyDownEditInput={handleKeyDownEditInput} 
-         
+          handleKeyDownEditInput={handleKeyDownEditInput}
         />
       </li>
     );
@@ -41,9 +53,18 @@ export default function TodoList(props) {
 
   return (
     <>
-      <ul>
-        <button onClick={()=>suprimeDejaFait()}>supprimer deja fait</button>
-      </ul>
+      <button type="button" onClick={() => deleteAll()}>
+        Delete all
+      </button>
+
+      {listIsEmpty() ? (
+        ""
+      ) : (
+        <button type="button" onClick={() => deleteCompleted()}>
+          Delete all completed
+        </button>
+      )}
+
       <ul className={"todo-list"}>{listHtml}</ul>
     </>
   );

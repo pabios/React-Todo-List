@@ -2,9 +2,9 @@ import "./App.css";
 
 import { useEffect, useState } from "react";
 
+import List from "./components/TodoList";
 import TodoFilter from "./components/TodoFilter";
 import TodoInput from "./components/TodoInput";
-import TodoList from "./components/TodoList";
 
 const initialTodo = {
   id: 1,
@@ -173,7 +173,7 @@ function App() {
     setTodos(newList);
   };
 
-  const handleKeyDownEditInput = (key, id,oldTitle) => {
+  const handleKeyDownEditInput = (key, id, oldTitle) => {
     switch (key) {
       case "Enter":
         const newList = todos.map((t) => {
@@ -185,30 +185,20 @@ function App() {
         });
         setTodos(newList);
         break;
-
-      case 'Escape':
+      case "Escape":
         const newList2 = todos.map((t) => {
           if (t.id === id) {
-            return { ...t,oldTitle, isEditing: !t.isEditing };
+            return { ...t, title: oldTitle, isEditing: !t.isEditing };
           } else {
             return t;
           }
         });
         setTodos(newList2);
-
-
-
         break;
       default:
         break;
     }
   };
-
-  const suprimeDejaFait = ()=>{
-    console.log(todo=> (todo.isCompleted))
-    const resteTache = todos.filter(todo=> (todo.isCompleted));
-    setNewTodo(resteTache)
-  }
 
   const onEditInputChange = (value, id) => {
     console.log("onEditInputChange : ", value);
@@ -230,6 +220,23 @@ function App() {
     setTodos(newList);
   };
 
+  const deleteCompleted = () => {
+    console.log("deleteCompleted ");
+    // const newList = todos.filter((todo) => {
+    // if (todo.isCompleted) {
+    // return false;
+    // } else {
+    // return true;
+    // }
+    // });
+    const newList = todos.filter((todo) => !todo.isCompleted);
+    setTodos(newList);
+  };
+
+  const deleteAll = () => {
+    setTodos([]);
+  };
+
   return (
     <div className="App">
       {/* Le composant doit afficher :
@@ -246,14 +253,15 @@ function App() {
 
       <TodoFilter changeFilter={changeFilter} currentFilter={currentFilter} />
 
-      <TodoList
+      <List
         todos={filteredTodos}
         changeTodoState={changeTodoState}
         deleteTodo={deleteTodo}
         doubleClick={doubleClick}
         onEditInputChange={onEditInputChange}
         handleKeyDownEditInput={handleKeyDownEditInput}
-        suprimeDejaFait={suprimeDejaFait}
+        deleteCompleted={deleteCompleted}
+        deleteAll={deleteAll}
       />
     </div>
   );
